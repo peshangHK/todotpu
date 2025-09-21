@@ -11,7 +11,7 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { auth } from "../services/firebase";
 import { setUser } from "../features/auth/authSlice";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./Register.module.css";
 
 const { Title } = Typography;
@@ -63,7 +63,6 @@ export default function Register() {
       });
     }
   };
-
   return (
     <AppComp>
       {contextHolder}
@@ -112,6 +111,9 @@ export default function Register() {
               </Button>
             </Form.Item>
           </Form>
+          <div style={{ textAlign: "center" }}>
+            Do you have an account? <Link to="/login">Login</Link>
+          </div>
         </Card>
       </div>
     </AppComp>
