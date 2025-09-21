@@ -1,0 +1,50 @@
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+}
+body {
+  background-color: #ffffff;
+  color: #000000;
+  transition: background-color 0.3s, color 0.3s;
+}
+/* for dark mode*/
+body.dark {
+  background-color: #121212;
+  color: #eaeaea;
+}
+
+body.dark .container {
+  background-color: #453f3f;
+  color: #eaeaea;
+  border-radius: 8px;
+}
+
+/* Inputs */
+body.dark input,
+body.dark select,
+body.dark textarea {
+  background-color: #2a2a2a;
+  border: 1px solid #444;
+  color: #eaeaea;
+}
+
+/* Buttons */
+body.dark button {
+  background-color: #ae5757;
+  color: #eaeaea;
+  border: 1px solid #555;
+}
+
+body.dark button:hover {
+  background-color: #555;
+}
+
+/* List items */
+body.dark .item {
+  border-bottom: 1px solid #333;
+}
+
+body.dark .delete {
+  color: #ff6b6b;
+}
