@@ -1,4 +1,3 @@
-// src/components/TodoList.jsx
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -66,13 +65,13 @@ export default function TodoList() {
     );
   };
 
-  // --- OPEN UPDATE MODAL ---
+  // OPEN UPDATE MODAL
   const handleOpenUpdate = (todo) => {
     setCurrentTodo(todo);
     setIsModalVisible(true);
   };
 
-  // --- SUBMIT UPDATE ---
+  // SUBMIT UPDATE
   const handleUpdateSubmit = (values) => {
     dispatch(
       updateTodoAction({
@@ -91,7 +90,7 @@ export default function TodoList() {
     dispatch(deleteTodoAction(id));
   };
 
-  //Filtering + Searching
+  // Filtering + Searching
   const filteredItems = items
     .filter((item) => {
       if (filter === "active") return !item.completed;
@@ -183,7 +182,7 @@ export default function TodoList() {
           </List.Item>
         )}
       />
-      {/* {updaing modal and form} */}
+      {/* updaing modal and form */}
       <Modal
         title="Update Todo"
         open={isModalVisible}

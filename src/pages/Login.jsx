@@ -26,7 +26,7 @@ export default function Login() {
     const { email, password } = values;
     setLoading(true);
     try {
-      // Dispatch our Redux thunk that calls signInWithEmailAndPassword
+      // Dispatch our Redux that calls signInWithEmailAndPassword
       await dispatch(loginUser({ email, password })).unwrap();
       messageApi.open({
         type: "success",
@@ -37,10 +37,11 @@ export default function Login() {
           navigate("/"); // navigate after message closes
         },
       });
-    } catch (err) {
+    } catch (error) {
       messageApi.open({
         type: "error",
-        content: "Login Failed, wrong user name and/or password" || err,
+        content:
+          error.message || "Login Failed, wrong user name and/or password",
         className: "custom-class",
         style: {
           marginTop: "20vh",

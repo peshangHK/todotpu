@@ -1,4 +1,3 @@
-// src/services/todoService.js
 import { db } from "../services/firebase";
 import {
   collection,
@@ -12,7 +11,7 @@ import {
   where,
 } from "firebase/firestore";
 
-// --- CREATE TODO ---
+// CREATE TODO
 export const addTodo = async ({
   title,
   description = "",
@@ -45,7 +44,7 @@ export const addTodo = async ({
   };
 };
 
-// --- READ TODOS ---
+// READ TODOS
 export const getTodos = async (userId) => {
   if (!userId) throw new Error("User ID is required");
 
@@ -66,7 +65,7 @@ export const getTodos = async (userId) => {
   });
 };
 
-// --- UPDATE TODO ---
+// UPDATE TODO
 export const updateTodo = async (id, updates) => {
   if (!id) throw new Error("Todo ID is required");
 
@@ -80,7 +79,7 @@ export const updateTodo = async (id, updates) => {
   return { id, ...updates };
 };
 
-// --- DELETE TODO ---
+// DELETE TODO
 export const deleteTodo = async (id) => {
   if (!id) throw new Error("Todo ID is required");
 

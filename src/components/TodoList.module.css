@@ -14,7 +14,7 @@
   display: flex;
   gap: 10px;
   margin-bottom: 20px;
-  flex-wrap: wrap; /* ensures items wrap on smaller screens */
+  flex-wrap: wrap;
 }
 
 .input {
@@ -70,8 +70,6 @@
   background: none;
   border: none;
 }
-
-/* --- Responsive breakpoints --- */
 
 /* Small tablets & below */
 @media (max-width: 768px) {

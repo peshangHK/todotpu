@@ -20,7 +20,7 @@ export default function Home() {
   }, [user, navigate]);
 
   if (!user) {
-    return null; // nothing while redirecting
+    return null;
   }
 
   return (

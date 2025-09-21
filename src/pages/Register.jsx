@@ -1,5 +1,12 @@
-import React from "react";
-import { Form, Input, Button, Card, Typography, message } from "antd";
+import {
+  Form,
+  Input,
+  Button,
+  Card,
+  Typography,
+  message,
+  App as AppComp,
+} from "antd";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { auth } from "../services/firebase";
@@ -12,7 +19,7 @@ const { Title } = Typography;
 export default function Register() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const [messageApi, contextHolder] = message.useMessage();
   const onFinish = async (values) => {
     const { email, password, displayName } = values;
 
@@ -36,60 +43,77 @@ export default function Register() {
         })
       );
 
-      message.success("Регистрация прошла успешно! идёт загрузка профиля...");
-      navigate("/");
+      messageApi.open({
+        type: "success",
+        content: "Registration has succesfuly done!",
+        style: { marginTop: "20vh" },
+        duration: 1, // seconds
+        onClose: () => {
+          navigate("/"); // navigate after message closes
+        },
+      });
     } catch (error) {
-      console.error(error);
-      message.error(error.message);
+      messageApi.open({
+        type: "error",
+        content: error.message || "Registration Failed, something went wrong",
+        className: "custom-class",
+        style: {
+          marginTop: "20vh",
+        },
+      });
     }
   };
 
   return (
-    <div className={styles.container}>
-      <Card className={styles.card}>
-        <Title level={2} style={{ textAlign: "center" }}>
-          Register
-        </Title>
-        <Form layout="vertical" onFinish={onFinish}>
-          <Form.Item
-            label="Name"
-            name="displayName"
-            rules={[
-              { required: true, message: "Пожалйста, введите ваше имя!" },
-            ]}
-          >
-            <Input placeholder="Ваше Имя" />
-          </Form.Item>
+    <AppComp>
+      {contextHolder}
+      <div className={styles.container}>
+        <Card className={styles.card}>
+          <Title level={2} style={{ textAlign: "center" }}>
+            Register
+          </Title>
+          <Form layout="vertical" onFinish={onFinish}>
+            <Form.Item
+              label="Name"
+              name="displayName"
+              rules={[{ required: true, message: "Please enter your name" }]}
+            >
+              <Input placeholder="Your Name" />
+            </Form.Item>
 
-          <Form.Item
-            label="Email"
-            name="email"
-            rules={[
-              { required: true, message: "Пожалйста, введите вашу э.почту!" },
-              { type: "email", message: "не правильный формат э. почты!" },
-            ]}
-          >
-            <Input placeholder="э. почта" />
-          </Form.Item>
+            <Form.Item
+              label="Email"
+              name="email"
+              rules={[
+                { required: true, message: "Please enter your E-mail" },
+                { type: "email", message: "Wrong E-mail format!" },
+              ]}
+            >
+              <Input placeholder="E-mail" />
+            </Form.Item>
 
-          <Form.Item
-            label="Password"
-            name="password"
-            rules={[
-              { required: true, message: "Пожалйста, придумайте пароль" },
-              { min: 6, message: "пароль дожна быть минимум 6 символов" },
-            ]}
-          >
-            <Input.Password placeholder="Введите пароль" />
-          </Form.Item>
+            <Form.Item
+              label="Password"
+              name="password"
+              rules={[
+                { required: true, message: "Please create a password" },
+                {
+                  min: 6,
+                  message: "The password should be longer than 5 symbols",
+                },
+              ]}
+            >
+              <Input.Password placeholder="Enter Your Password" />
+            </Form.Item>
 
-          <Form.Item>
-            <Button type="primary" htmlType="submit" block>
-              Регистрироваться
-            </Button>
-          </Form.Item>
-        </Form>
-      </Card>
-    </div>
+            <Form.Item>
+              <Button type="primary" htmlType="submit" block>
+                Register
+              </Button>
+            </Form.Item>
+          </Form>
+        </Card>
+      </div>
+    </AppComp>
   );
 }

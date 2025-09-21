@@ -1,4 +1,3 @@
-// src/features/todos/todoSlice.js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {
   addTodo,
@@ -52,7 +51,7 @@ export const deleteTodoAction = createAsyncThunk(
   }
 );
 
-// --- SLICE ---
+// SLICE
 const todoSlice = createSlice({
   name: "todos",
   initialState: { items: [], status: "idle", error: null },

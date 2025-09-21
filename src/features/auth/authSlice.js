@@ -1,4 +1,3 @@
-// src/features/auth/authSlice.js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {
   createUserWithEmailAndPassword,
@@ -11,7 +10,7 @@ import { auth } from "../../services/firebase"; // adjust path if needed
 
 const initialState = {
   user: null,
-  status: "idle", // idle | loading | succeeded | failed
+  status: "idle",
   error: null,
 };
 
@@ -21,7 +20,7 @@ export const registerUser = createAsyncThunk(
   async ({ email, password, displayName }, { rejectWithValue }) => {
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
-      // update profile with displayName (optional)
+      // update profile with displayName
       if (displayName) {
         await updateProfile(res.user, { displayName });
       }
@@ -68,7 +67,7 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    // setUser expects a serializable object: { uid, email, displayName? }
+    // setUser serializable object
     setUser: (state, action) => {
       state.user = action.payload;
       state.status = "succeeded";
@@ -125,7 +124,7 @@ const authSlice = createSlice({
 export const { setUser, clearUser } = authSlice.actions;
 export default authSlice.reducer;
 
-// Start listening to auth changes (use in main.jsx once)
+// Start listening to auth changes
 export const listenToAuthChanges = () => (dispatch) => {
   onAuthStateChanged(auth, (user) => {
     if (user) {
